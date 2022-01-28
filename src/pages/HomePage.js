@@ -13,7 +13,7 @@ class HomePage extends HomeController {
         <React.Fragment>
           <div className="row justify-content-center mt-4">
             <div className="col-12 col-md-6 text-center">
-              <div class="alert alert-success" role="alert">
+              <div className="alert alert-success" role="alert">
                 <p><b>¡Muchas gracias!</b></p>
                 <p>&nbsp;</p>
                 <p>Te contactaremos a la brevedad para finalizar con las validaciones.</p>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://cmr-soluciones.com.ar/validacion-usuario/";
+const BASE_URL = "https://financiaonline.com.ar/validacion-usuario/api/";
 
 async function callApi(endpoint, options = {}) {
   let restdb = await axios.create({
