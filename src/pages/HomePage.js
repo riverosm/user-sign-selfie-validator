@@ -2,10 +2,11 @@ import React from 'react';
 import HomeController from './HomeController.js';
 import Signature from '../components/Signature.js';
 import Webcam from '../components/Webcam.js';
+import ImageUploaderAndResizer from '../components/ImageUploaderAndResizer.js';
 
 class HomePage extends HomeController {
   render() {
-    const { showSignature, showSelfie, showThanks, allInfoOk, loading } = this.state;
+    const { showSignature, showSelfie, showThanks, allInfoOk, loading, showUploadImages } = this.state;
 
     if (showThanks) {
       return (
@@ -33,6 +34,11 @@ class HomePage extends HomeController {
         {showSelfie &&
           <Webcam
             buttonSelfieOnClick={this.buttonSelfieOnClick}
+          />
+        }
+        {showUploadImages &&
+          <ImageUploaderAndResizer
+            buttonUploadImagesOnClick={this.buttonUploadImagesOnClick}
           />
         }
         {allInfoOk &&
@@ -76,7 +82,7 @@ class HomePage extends HomeController {
           </React.Fragment>
         }
         {
-          !showSignature && !showSelfie && !allInfoOk &&
+          !showSignature && !showSelfie && !allInfoOk && !showUploadImages &&
           <React.Fragment>
             <div className="row justify-content-center mt-4">
               <div className="col-12 col-md-6">
@@ -134,7 +140,7 @@ class HomePage extends HomeController {
                 <button type="button" className="btn btn-block btn-outline-secondary">Cancelar</button>
               </div>
               <div className="col-6 col-md-3">
-                <button type="button" className="btn btn-block btn-outline-success" onClick={this.showSelfie}>Aceptar</button>
+                <button type="button" className="btn btn-block btn-outline-success" onClick={this.showUploadImages}>Aceptar</button>
               </div>
             </div>
           </React.Fragment >

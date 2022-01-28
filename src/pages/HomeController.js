@@ -11,11 +11,14 @@ class HomeController extends PageController {
       showSelfie: false,
       showThanks: false,
       allInfoOk: false,
+      showUploadImages: false,
     };
   }
   async componentDidMount() {
     localStorage.removeItem("userSignature");
     localStorage.removeItem("userSelfie");
+    localStorage.removeItem("userDocumentFront");
+    localStorage.removeItem("userDocumentBack");
   }
 
   showSelfie = () => {
@@ -42,6 +45,18 @@ class HomeController extends PageController {
     })
   }
 
+  showUploadImages = () => {
+    this.setState({
+      showUploadImages: true,
+    })
+  }
+
+  hideUploadImages = () => {
+    this.setState({
+      showUploadImages: false,
+    })
+  }
+
   buttonSelfieOnClick = () => {
     this.hideSelfie();
     this.showSignature();
@@ -54,10 +69,17 @@ class HomeController extends PageController {
     })
   }
 
+  buttonUploadImagesOnClick = () => {
+    this.hideUploadImages();
+    this.showSelfie();
+  }
+
   createPdf = async () => {
     const sendInfo = {
       signature: localStorage.getItem("userSignature"),
       selfie: localStorage.getItem("userSelfie"),
+      documentFront: localStorage.getItem("userDocumentFront"),
+      documentBack: localStorage.getItem("userDocumentBack"),
     }
 
     this.setState({
