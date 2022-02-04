@@ -57,7 +57,7 @@ class ImageUploaderAndResizer extends Component {
             <div className="col-12 col-md-10">
               <div className="card">
                 <div className="card-header">
-                  Selecciona una imagen del frente de tu DNI
+                  Seleccione una imagen del frente de tu DNI
               </div>
 
                 <div className="row justify-content-center m-4 border rounded" style={{ height: '200px' }}>
@@ -80,7 +80,7 @@ class ImageUploaderAndResizer extends Component {
             <div className="col-12 col-md-10">
               <div className="card">
                 <div className="card-header">
-                  Selecciona una imagen del dorso de tu DNI
+                  Seleccione una imagen del dorso de tu DNI
               </div>
 
                 <div className="row justify-content-center m-4 border rounded" style={{ height: '200px' }}>
@@ -101,8 +101,8 @@ class ImageUploaderAndResizer extends Component {
 
           <div className="row justify-content-center m-2">
             <div className="col-6 col-md-3">
-              <button className="btn btn-block btn-outline-success" onClick={this.saveDocuments}>
-                Subir imágenes
+              <button onClick={this.saveDocuments}>
+                Continuar
               </button>
             </div>
           </div>

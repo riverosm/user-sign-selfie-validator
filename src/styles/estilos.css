@@ -10,16 +10,12 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family: 'Open Sans',sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 /* @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; */
@@ -40,11 +36,11 @@ IMG {
 }
 
 .topContainer {
-  border: dotted 1px #000;
+  border: dotted 1px var(--main-color);
   border-radius: 10px;
   position: fixed;
   left: 50%;
-  top: 20%;
+  top: 240px;
   transform: translate(-50%, -20%);
   z-index: 1000;
   width: 96%;
@@ -112,7 +108,6 @@ IMG {
 /* Mutual Bicentenario de hacia abajo */
 
 H3 {
-  font-family: 'Open Sans', sans-serif;
   color: #1a1a1a;
   font-size: 2rem;
   font-family: 'Barlow',sans-serif;

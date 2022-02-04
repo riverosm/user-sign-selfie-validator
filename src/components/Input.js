@@ -32,7 +32,7 @@ class Input extends React.Component {
               defaultValue={defaultValue}
               type={type}
               ref={forwardRef}
-              placeHolder={placeholder}
+              placeholder={placeholder}
             // min={min}
             // max={max}
             // disabled={disabled}

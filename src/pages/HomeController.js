@@ -25,6 +25,7 @@ class HomeController extends PageController {
     localStorage.removeItem("userSelfie");
     localStorage.removeItem("userDocumentFront");
     localStorage.removeItem("userDocumentBack");
+    localStorage.removeItem("userData");
   }
 
   /**
@@ -64,11 +65,22 @@ class HomeController extends PageController {
   }
 
   showUploadImages = () => {
+
+    // this.setState({
+    //   showUploadImages: true,
+    // })
+
+    // return;
+
     const userData = this.getUserData();
 
     const errors = validateFields(userData);
 
     if (errors.length === 0) {
+      localStorage.setItem(
+        "userData",
+        JSON.stringify((userData))
+      );
       this.setState({
         showUploadImages: true,
       })
@@ -106,6 +118,7 @@ class HomeController extends PageController {
       selfie: localStorage.getItem("userSelfie"),
       documentFront: localStorage.getItem("userDocumentFront"),
       documentBack: localStorage.getItem("userDocumentBack"),
+      userData: localStorage.getItem("userData"),
     }
 
     this.setState({

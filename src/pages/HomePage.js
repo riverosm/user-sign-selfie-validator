@@ -136,7 +136,7 @@ class HomePage extends HomeController {
                           </select>
                         </div>
                         <div className="col-md-6">
-                          <input type="text" placeHolder="Nro Documento" />
+                          <input type="text" placeholder="Nro Documento" />
                         </div>
                       </div>
                     </li>
@@ -178,14 +178,14 @@ class HomePage extends HomeController {
                       </select>
                     </div>
                     <div className="col-md-6">
-                      <input type="text" placeHolder="Nro Documento" />
+                      <input type="text" placeholder="Nro Documento" />
                     </div>
                   </div>
 
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center mt-4">
+            {/* <div className="row justify-content-center mt-4">
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
@@ -205,23 +205,24 @@ class HomePage extends HomeController {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="row justify-content-center mt-4">
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
-                    Aceptar términos y condiciones
+                    Términos y condiciones
               </div>
                   <ul className="list-group list-group-flush">
                     <div className="row justify-content-center m-4">
                       <div className="col-md-10">
-                        <textarea disabled>
+                        <textarea disabled
+                          value="Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
                           Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
                           Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
                           Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
-                          Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
-                          Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos
+                          Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos Acá los términos"
+                          >
                         </textarea>
                       </div>
                     </div>
@@ -229,7 +230,7 @@ class HomePage extends HomeController {
                       <div className="form-check form-check-inline">
                         <div className="custom-switch">
                           <input type="checkbox" className="custom-control-input" id="acceptTerms" />
-                          <label className="custom-control-label" for="acceptTerms">Acepto haber leído los términos y condiciones</label>
+                          <label className="custom-control-label" htmlFor="acceptTerms">Acepto haber leído los términos y condiciones</label>
                         </div>
                       </div>
                     </li>
@@ -248,7 +249,7 @@ class HomePage extends HomeController {
             </div> */}
             <div className="row justify-content-center mt-4 text-center mb-4">
               <div className="col-6 col-md-3">
-                <button type="button" className="btn btn-block btn-outline-warning" onClick={this.showUploadImages}>Enviar</button>
+                <button type="button" onClick={this.showUploadImages}>Continuar</button>
               </div>
             </div>
           </React.Fragment >
