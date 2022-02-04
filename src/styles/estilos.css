@@ -1,3 +1,10 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans%3A400%7CBarlow%3A600&#038;display=fallback&#038;ver=3.7.6';
+
+:root {
+  --main-color: #ff5e14;
+  --warning: red;
+}
+
 body {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -101,3 +108,154 @@ IMG {
 .download-btn {
   margin-left: 25px;
 }
+
+/* Mutual Bicentenario de hacia abajo */
+
+H3 {
+  font-family: 'Open Sans', sans-serif;
+  color: #1a1a1a;
+  font-size: 2rem;
+  font-family: 'Barlow',sans-serif;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+input[type="email"],input[type="number"], input[type="password"], input[type="reset"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], select, textarea {
+  color: #666;
+  padding: .75em;
+  height: auto;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #eaeaea;
+  border-radius: 2px;
+  background: #fafafa;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: all .2s linear;
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+/* input[type="email"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], textarea {
+  border: 1px solid #ccc;
+} */
+
+input:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="reset"]:focus, input[type="search"]:focus, textarea:focus {
+  border-color: var(--main-color);
+}
+input[type="email"]:focus, input[type="password"]:focus, input[type="reset"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
+  background-color: #fff;
+  /* border-color: #eaeaea; */
+  box-shadow: none;
+}
+
+input[type="email"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, textarea:focus {
+  color: #111;
+}
+
+button, .button, input#submit, input[type="button"], input[type="submit"], input[type="reset"], .card-header {
+  border-style: solid;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  color: #ffffff;
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  border-radius: 0;
+  padding-top: 18px;
+  padding-right: 32px;
+  padding-bottom: 18px;
+  padding-left: 32px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+body, button, input, select, textarea, .ast-button, .ast-custom-button {
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type="reset"]:hover, input[type="reset"]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+  color: #ffffff;
+  background-color: #ff702d;
+  border-color: #ff702d;
+}
+
+.card, .list-group LI {
+  border-color: var(--main-color);
+}
+
+select {
+  background: #fafafa url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right .75rem center/8px 10px no-repeat;
+  display: inline-block;
+  width: 100%;
+  height: calc(2.25rem + 12px);
+  padding: .375rem 1.75rem .375rem .75rem;
+  color: #666;
+  vertical-align: middle;
+  background-size: auto;  
+  background-size: 8px 10px;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+  border-color: var(--main-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 47, 69, 0.25) !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: var(--main-color) !important;
+  background-color: var(--main-color) !important;
+}
+
+.custom-control-input:active~.custom-control-label::before {
+  background-color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+  border-color: var(--main-color) !important;
+}
+
+.custom-control-input-green:not(:disabled):active~.custom-control-label::before {
+  background-color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+/* .btn-outline-warning {
+  color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+.btn-outline-warning:hover {
+  color: #fafafa;
+  background-color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled).active, .btn-outline-warning:not(:disabled):not(.disabled):active, .show > .btn-outline-warning.dropdown-toggle {
+  color: #fafafa;
+  background-color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled).active:focus, .btn-outline-warning:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .2rem rgba(255,193,7,.5);
+} */

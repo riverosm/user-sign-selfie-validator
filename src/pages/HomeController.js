@@ -1,7 +1,12 @@
+import React from "react";
 import PageController from "./PageController.js";
 import pdfsApi from "../actions/pdfApi.js";
+import validateFields from "../validations/homeValidation";
 
 class HomeController extends PageController {
+  name = React.createRef();
+  surname = React.createRef();
+
   constructor(props) {
     super(props);
 
@@ -12,6 +17,7 @@ class HomeController extends PageController {
       showThanks: false,
       allInfoOk: false,
       showUploadImages: false,
+      errors: [],
     };
   }
   async componentDidMount() {
@@ -20,6 +26,18 @@ class HomeController extends PageController {
     localStorage.removeItem("userDocumentFront");
     localStorage.removeItem("userDocumentBack");
   }
+
+  /**
+   * Obtiene los datos de la oferta
+   */
+  getUserData = () => {
+    const userData = {
+      name: this.name.current.value,
+      surname: this.surname.current.value,
+    };
+
+    return userData;
+  };
 
   showSelfie = () => {
     this.setState({
@@ -46,9 +64,17 @@ class HomeController extends PageController {
   }
 
   showUploadImages = () => {
-    this.setState({
-      showUploadImages: true,
-    })
+    const userData = this.getUserData();
+
+    const errors = validateFields(userData);
+
+    if (errors.length === 0) {
+      this.setState({
+        showUploadImages: true,
+      })
+    } else {
+      this.setState({ errors });
+    }
   }
 
   hideUploadImages = () => {
