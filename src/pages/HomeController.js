@@ -6,6 +6,12 @@ import validateFields from "../validations/homeValidation";
 class HomeController extends PageController {
   name = React.createRef();
   surname = React.createRef();
+  documentType = React.createRef();
+  documentNumber = React.createRef();
+  capital = React.createRef();
+  plazo = React.createRef();
+  cuota = React.createRef();
+  neto = React.createRef();
 
   constructor(props) {
     super(props);

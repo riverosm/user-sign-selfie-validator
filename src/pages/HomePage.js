@@ -104,47 +104,48 @@ class HomePage extends HomeController {
                 <div className="card">
                   <div className="card-header">
                     Información del solicitante
+              </div>
+                  <div className="row ml-2 mr-2">
+                    <div className="col-md-6">
+                      <Input
+                        placeholder="Nombre(s)"
+                        type={types.TEXT}
+                        forwardRef={this.name}
+                        err={this.getErrors("name")}
+                      ></Input>
+                    </div>
+                    <div className="col-md-6">
+                      <Input
+                        placeholder="Apellido(s)"
+                        type={types.TEXT}
+                        forwardRef={this.surname}
+                        err={this.getErrors("surname")}
+                      ></Input>
+                    </div>
                   </div>
-                  <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <Input
-                            placeholder="Nombre"
-                            type={types.TEXT}
-                            forwardRef={this.name}
-                            err={this.getErrors("name")}
-                          ></Input>
-                        </div>
-                        <div className="col-md-6">
-                          <Input
-                            placeholder="Apellido"
-                            type={types.TEXT}
-                            forwardRef={this.surname}
-                            err={this.getErrors("surname")}
-                          ></Input>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <select>
-                            <option value="1">DNI</option>
-                            <option value="1">CI</option>
-                            <option value="1">LE</option>
-                          </select>
-                        </div>
-                        <div className="col-md-6">
-                          <input type="text" placeholder="Nro Documento" />
-                        </div>
-                      </div>
-                    </li>
-                    <li className="list-group-item">CUIT</li>
-                  </ul>
+                  <div className="row ml-2 mr-2">
+                    <div className="col-md-6">
+                      <select ref={this.documentType}>
+                        <option value="">Seleccione tipo de documento ...</option>
+                        <option value="1">DNI</option>
+                        <option value="2">CI</option>
+                        <option value="3">LE</option>
+                      </select>
+                    </div>
+                    <div className="col-md-6">
+                    <Input
+                        placeholder="Nro. Documento"
+                        type={types.TEXT}
+                        forwardRef={this.documentNumber}
+                        err={this.getErrors("documentNumber")}
+                      ></Input>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
+
             <div className="row justify-content-center mt-4">
               <div className="col-12 col-md-6">
                 <div className="card">
@@ -154,31 +155,37 @@ class HomePage extends HomeController {
                   <div className="row ml-2 mr-2">
                     <div className="col-md-6">
                       <Input
-                        placeholder="Nombre"
-                        type={types.TEXT}
-                        forwardRef={this.name}
-                        err={this.getErrors("name")}
+                        placeholder="Capital"
+                        type={types.NUMBER}
+                        forwardRef={this.capital}
+                        err={this.getErrors("capital")}
                       ></Input>
                     </div>
                     <div className="col-md-6">
-                      <Input
-                        placeholder="Apellido"
-                        type={types.TEXT}
-                        forwardRef={this.surname}
-                        err={this.getErrors("surname")}
+                    <Input
+                        placeholder="Plazo"
+                        type={types.NUMBER}
+                        forwardRef={this.plazo}
+                        err={this.getErrors("plazo")}
                       ></Input>
                     </div>
                   </div>
                   <div className="row ml-2 mr-2">
                     <div className="col-md-6">
-                      <select>
-                        <option value="1">DNI</option>
-                        <option value="1">CI</option>
-                        <option value="1">LE</option>
-                      </select>
+                    <Input
+                        placeholder="Cuota"
+                        type={types.NUMBER}
+                        forwardRef={this.cuota}
+                        err={this.getErrors("cuota")}
+                      ></Input>
                     </div>
                     <div className="col-md-6">
-                      <input type="text" placeholder="Nro Documento" />
+                    <Input
+                        placeholder="Neto"
+                        type={types.NUMBER}
+                        forwardRef={this.neto}
+                        err={this.getErrors("neto")}
+                      ></Input>
                     </div>
                   </div>
 
@@ -229,7 +236,7 @@ class HomePage extends HomeController {
                     <li className="list-group-item">
                       <div className="form-check form-check-inline">
                         <div className="custom-switch">
-                          <input type="checkbox" className="custom-control-input" id="acceptTerms" />
+                          <input type="checkbox" className="custom-control-input" id="acceptTerms" ref={this.acceptTerms} />
                           <label className="custom-control-label" htmlFor="acceptTerms">Acepto haber leído los términos y condiciones</label>
                         </div>
                       </div>

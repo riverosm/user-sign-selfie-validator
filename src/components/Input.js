@@ -8,8 +8,8 @@ class Input extends React.Component {
       forwardRef,
       defaultValue,
       placeholder,
-      // step,
-      // min,
+      step = 1,
+      min = 0,
       // max,
       // disabled,
       // onBlur,
@@ -33,10 +33,10 @@ class Input extends React.Component {
               type={type}
               ref={forwardRef}
               placeholder={placeholder}
-            // min={min}
+              min={min}
+              step={step}
             // max={max}
             // disabled={disabled}
-            // step={step}
             // lang="es"
             // onBlur={onBlur}
             // onChange={onchangeFunction}
