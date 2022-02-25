@@ -50,6 +50,10 @@ class HomeController extends PageController {
       neto: this.neto.current.value,
     };
 
+    this.setState({
+      userData
+    })
+
     return userData;
   };
 
@@ -117,7 +121,6 @@ class HomeController extends PageController {
     this.hideSignature();
     this.setState({
       allInfoOk: true,
-      userData: this.getUserData(),
     })
   }
 
