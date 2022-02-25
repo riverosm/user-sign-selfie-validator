@@ -6,7 +6,7 @@ class ImageUploaderAndResizer extends Component {
   state = {
     errors: [],
     maxFileSize: 2097152, // 2MB
-    maxWidthOrHeight: 1600,
+    maxWidthOrHeight: 600,
     imgDocumentFront: null,
     imgDocumentBack: null,
   }
