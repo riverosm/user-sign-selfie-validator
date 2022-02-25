@@ -73,12 +73,12 @@ class HomePage extends HomeController {
                     Préstamo solicitado
                   </div>
                   <ul className="list-group list-group-flush text-left m-4">
-                      <p>Nombre: {localStorage.getItem("userData").name + " " + localStorage.getItem("userData").surname}</p>
-                      <p>Documento: {localStorage.getItem("userData").documentNumber}</p>
-                      <p>Capital: {localStorage.getItem("userData").capital}</p>
-                      <p>Plazo: {localStorage.getItem("userData").plazo}</p>
-                      <p>Cuota: {localStorage.getItem("userData").cuota}</p>
-                      <p>Neto: {localStorage.getItem("userData").neto}</p>
+                      <p>Nombre: {this.getUserData().name + " " + this.getUserData().surname}</p>
+                      <p>Documento: {this.getUserData().documentNumber}</p>
+                      <p>Capital: {this.getUserData().capital}</p>
+                      <p>Plazo: {this.getUserData().plazo}</p>
+                      <p>Cuota: {this.getUserData().cuota}</p>
+                      <p>Neto: {this.getUserData().neto}</p>
                   </ul>
                 </div>
               </div>
