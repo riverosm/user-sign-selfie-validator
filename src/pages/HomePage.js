@@ -60,7 +60,7 @@ class HomePage extends HomeController {
           <React.Fragment>
             <div className="row justify-content-center mt-4 text-center">
               <div className="col-12 col-md-12">
-                <button type="button" className="btn btn-block btn-outline-success" onClick={loading ? this.createPdf : undefined}>
+                <button type="button" className="btn btn-block btn-outline-success" onClick={!loading ? this.createPdf : undefined}>
                   {loading && <span className="spinner-border spinner-border-sm" role="status"></span>}
                   {!loading && "Enviar información"}
                 </button>
