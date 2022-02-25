@@ -24,6 +24,7 @@ class HomeController extends PageController {
       allInfoOk: false,
       showUploadImages: false,
       errors: [],
+      userData: [],
     };
   }
   async componentDidMount() {
@@ -116,6 +117,7 @@ class HomeController extends PageController {
     this.hideSignature();
     this.setState({
       allInfoOk: true,
+      userData: this.getUserData(),
     })
   }
 

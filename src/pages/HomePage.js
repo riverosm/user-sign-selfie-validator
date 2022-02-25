@@ -9,7 +9,7 @@ import { types } from "../models/inputs";
 
 class HomePage extends HomeController {
   render() {
-    const { showSignature, showSelfie, showThanks, allInfoOk, loading, showUploadImages } = this.state;
+    const { showSignature, showSelfie, showThanks, allInfoOk, loading, showUploadImages, userData } = this.state;
 
     if (showThanks) {
       return (
@@ -73,12 +73,12 @@ class HomePage extends HomeController {
                     Préstamo solicitado
                   </div>
                   <ul className="list-group list-group-flush text-left m-4">
-                      <p>Nombre: {this.getUserData().name + " " + this.getUserData().surname}</p>
-                      <p>Documento: {this.getUserData().documentNumber}</p>
-                      <p>Capital: {this.getUserData().capital}</p>
-                      <p>Plazo: {this.getUserData().plazo}</p>
-                      <p>Cuota: {this.getUserData().cuota}</p>
-                      <p>Neto: {this.getUserData().neto}</p>
+                      <p>Nombre: {userData.name + " " + userData.surname}</p>
+                      <p>Documento: {userData.documentNumber}</p>
+                      <p>Capital: {userData.capital}</p>
+                      <p>Plazo: {userData.plazo}</p>
+                      <p>Cuota: {userData.cuota}</p>
+                      <p>Neto: {userData.neto}</p>
                   </ul>
                 </div>
               </div>
