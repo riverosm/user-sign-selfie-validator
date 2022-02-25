@@ -60,10 +60,27 @@ class HomePage extends HomeController {
           <React.Fragment>
             <div className="row justify-content-center mt-4 text-center">
               <div className="col-12 col-md-12">
-                <button type="button" className="btn btn-block btn-outline-success" onClick={this.createPdf}>
+                <button type="button" className="btn btn-block btn-outline-success" onClick={loading ? this.createPdf : undefined}>
                   {loading && <span className="spinner-border spinner-border-sm" role="status"></span>}
                   {!loading && "Enviar información"}
                 </button>
+              </div>
+            </div>
+            <div className="row justify-content-center mt-4">
+              <div className="col-12 col-md-6">
+                <div className="card">
+                  <div className="card-header">
+                    Préstamo solicitado
+                  </div>
+                  <ul className="list-group list-group-flush text-left m-4">
+                      <p>Nombre: {localStorage.getItem("userData").name + " " + localStorage.getItem("userData").surname}</p>
+                      <p>Documento: {localStorage.getItem("userData").documentNumber}</p>
+                      <p>Capital: {localStorage.getItem("userData").capital}</p>
+                      <p>Plazo: {localStorage.getItem("userData").plazo}</p>
+                      <p>Cuota: {localStorage.getItem("userData").cuota}</p>
+                      <p>Neto: {localStorage.getItem("userData").neto}</p>
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="row justify-content-center mt-4">

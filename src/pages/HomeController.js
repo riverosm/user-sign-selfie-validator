@@ -41,6 +41,12 @@ class HomeController extends PageController {
     const userData = {
       name: this.name.current.value,
       surname: this.surname.current.value,
+      documentType: this.documentType.current.value,
+      documentNumber: this.documentNumber.current.value,
+      capital: this.capital.current.value,
+      plazo: this.plazo.current.value,
+      cuota: this.cuota.current.value,
+      neto: this.neto.current.value,
     };
 
     return userData;
