@@ -5,6 +5,10 @@ class WebcamJS extends Component {
 
   state = { imgURL: null }
 
+  async componentDidMount() {
+    this.checkWebCam();
+  }
+
   webcamRef = React.createRef();
 
   clear = () => {
@@ -36,6 +40,22 @@ class WebcamJS extends Component {
     // })
   }
 
+  checkWebCam = () => {
+    // let md = navigator.mediaDevices;
+    // if (!md || !md.enumerateDevices) return false;
+    // console.log(md.enumerateDevices());
+    navigator.getMedia = (navigator.getUserMedia || // use the proper vendor prefix
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
+
+    navigator.getMedia({ video: true }, function () {
+      console.log("Disponible")
+    }, function () {
+      console.log("No disponible")
+    });
+  }
+
   saveImage = () => {
     localStorage.setItem(
       "userSelfie",
@@ -52,7 +72,7 @@ class WebcamJS extends Component {
     const videoConstraints = {
       width: 400,
       height: 400,
-      facingMode: "user"
+      facingMode: "environment" // "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
     };
 
     return (
@@ -69,7 +89,7 @@ class WebcamJS extends Component {
               <div className="row justify-content-center m-2">
                 <Webcam
                   audio={false}
-                  height={380}
+                  height={240}
                   ref={this.webcamRef}
                   screenshotFormat="image/jpeg"
                   width={380}

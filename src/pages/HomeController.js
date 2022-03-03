@@ -1,7 +1,7 @@
 import React from "react";
 import PageController from "./PageController.js";
 import pdfsApi from "../actions/pdfApi.js";
-import validateFields from "../validations/homeValidation";
+// import validateFields from "../validations/homeValidation";
 
 class HomeController extends PageController {
   name = React.createRef();
@@ -25,6 +25,9 @@ class HomeController extends PageController {
       showUploadImages: false,
       errors: [],
       userData: [],
+      showInfo: false,
+      stepNumber: 1,
+      allAccepted: false,
     };
   }
   async componentDidMount() {
@@ -81,29 +84,42 @@ class HomeController extends PageController {
     })
   }
 
+  showInfo = () => {
+    this.setState({
+      showInfo: true,
+    })
+  }
+
+  hideInfo = () => {
+    this.setState({
+      showInfo: false,
+    })
+  }
+
   showUploadImages = () => {
 
-    // this.setState({
-    //   showUploadImages: true,
-    // })
+    this.setState({
+      showUploadImages: true,
+      stepNumber: 2,
+    })
 
     // return;
 
-    const userData = this.getUserData();
+  // const userData = this.getUserData();
 
-    const errors = validateFields(userData);
+  // const errors = validateFields(userData);
 
-    if (errors.length === 0) {
-      localStorage.setItem(
-        "userData",
-        JSON.stringify((userData))
-      );
-      this.setState({
-        showUploadImages: true,
-      })
-    } else {
-      this.setState({ errors });
-    }
+  // if (errors.length === 0) {
+  //   localStorage.setItem(
+  //     "userData",
+  //     JSON.stringify((userData))
+  //   );
+  //   this.setState({
+  //     showUploadImages: true,
+  //   })
+  // } else {
+  //   this.setState({ errors });
+  // }
   }
 
   hideUploadImages = () => {
@@ -127,6 +143,10 @@ class HomeController extends PageController {
   buttonUploadImagesOnClick = () => {
     this.hideUploadImages();
     this.showSelfie();
+  }
+
+  isAllAccepted = () => {
+    return true;
   }
 
   createPdf = async () => {
