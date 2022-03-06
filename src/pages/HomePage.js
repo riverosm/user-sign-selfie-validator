@@ -2,7 +2,8 @@ import React from 'react';
 import HomeController from './HomeController.js';
 import Signature from '../components/Signature.js';
 import Webcam from '../components/Webcam.js';
-import ImageUploaderAndResizer from '../components/ImageUploaderAndResizer.js';
+import WebcamPhoto from '../components/WebcamPhoto.js';
+// import ImageUploaderAndResizer from '../components/ImageUploaderAndResizer.js';
 // import LogoMutual from '../images/cropped-LogoMutual21-170x56.jpeg';
 // import Logo512 from '../images/logo512.png';
 import Logo192 from '../images/logo192.png';
@@ -11,28 +12,29 @@ import { types } from "../models/inputs";
 
 class HomePage extends HomeController {
   render() {
-    const { showSignature, showSelfie, showThanks, allInfoOk, loading, showUploadImages, userData, showInfo, stepNumber, allAccepted } = this.state;
-
-    if (showThanks) {
-      return (
-        <React.Fragment>
-          <div className="row justify-content-center mt-4">
-            <div className="col-12 col-md-6 text-center">
-              <div className="alert alert-success" role="alert">
-                <p><b>¡Muchas gracias!</b></p>
-                <p>&nbsp;</p>
-                <p>Te contactaremos a la brevedad para finalizar con las validaciones.</p>
-              </div>
-            </div>
-          </div>
-        </React.Fragment>
-      )
-    }
+    const { loading, userData, stepNumber } = this.state;
 
     return (
       <React.Fragment>
 
-      {!showInfo && 
+      {stepNumber < 0 && 
+        <div className="row justify-content-center mt-4">
+        <div className="col-12 text-center">
+            Bienvenido a
+        </div>
+        <div className="col-12 text-center mt-4">
+            <h3>Mutual Bicentenario</h3>
+        </div>
+        <div className="col-12 text-center mt-4">
+            <img src={Logo192} style={{ border: 'solid 0px' }} alt="Logo" />
+          </div>
+          <div className="col-12 text-center mt-4">
+              El usuario no existe
+          </div>
+        </div>
+      }
+
+      {stepNumber === 0 && 
         <div className="row justify-content-center mt-4">
           <div className="col-12 text-center">
               Bienvenido a
@@ -52,7 +54,7 @@ class HomePage extends HomeController {
         </div>
       }
 
-      {(showInfo || showSelfie) &&
+      {stepNumber > 0 && stepNumber < 7 &&
         <div className="row justify-content-center mt-4 align-items-center">
           <div className="col-6">
             <img src={Logo192} style={{ border: 'solid 0px', width: '40px' }} alt="Logo" />
@@ -63,7 +65,7 @@ class HomePage extends HomeController {
         </div>
       }
 
-      {showInfo &&
+      {stepNumber === 1 &&
         <div className="row justify-content-center mt-4">
           <div className="col-12 col-md-6">
             <div className="card">
@@ -74,13 +76,13 @@ class HomePage extends HomeController {
                   <p>Nombre y apellido: <b>{userData.name + " " + userData.surname}</b></p>
                   <p>Documento: <b>{userData.documentNumber}</b></p>
                   <p>&nbsp;</p>
-                  <p>Cuota final: <b>{userData.capital}</b></p>
+                  <p>Cuota final: <b>{this.convertNumber(userData.capital)}</b></p>
                   <p>Plazo: <b>{userData.plazo}</b></p>
-                  <p>Neto a recibir: <b>{userData.neto}</b></p>
-                  <p>Primer Vto Haberes: <b>{userData.cuota}</b></p>
+                  <p>Neto a recibir: <b>{this.convertNumber(userData.neto)}</b></p>
+                  <p>Primer Vto Haberes: <b>{this.convertNumber(userData.cuota)}</b></p>
                   <p>&nbsp;</p>
                   <div className="custom-switch">
-                    <input type="checkbox" className="custom-control-input" id="acceptTerms" ref={this.acceptTerms} />
+                    <input type="checkbox" className="custom-control-input" id="acceptTerms" />
                     <label className="custom-control-label" htmlFor="acceptTerms">Acepto Términos y Condiciones</label>
                   </div>
                   <div className="custom-switch">
@@ -95,14 +97,152 @@ class HomePage extends HomeController {
             </div>
 
             <div className="col-12 text-center mt-4">
-              <button type="button" onClick={this.showUploadImages} disabled={allAccepted}>Continuar</button>
+              <button type="button" onClick={this.showUploadImages} disabled={false}>Continuar</button>
             </div>
 
         </div>
       </div>  
       }
 
-      {false && !showInfo && !showSignature && !showSelfie && !allInfoOk && !showUploadImages &&
+      {stepNumber === 2 &&
+        <WebcamPhoto
+          buttonOnClick={this.buttonFrontDocumentOnClick}
+          documentPosition={"Frente"}
+          documentImg={"userDocumentFront"}
+        />
+      }
+
+      {stepNumber === 3 &&
+        <WebcamPhoto
+          buttonOnClick={this.buttonRearDocumentOnClick}
+          documentPosition={"Dorso"}
+          documentImg={"userDocumentBack"}
+        />
+      }
+
+      {stepNumber === 4 &&
+        <Webcam
+          buttonOnClick={this.buttonSelfieOnClick}
+        />
+      }
+
+      {stepNumber === 5 &&
+        <Signature
+          buttonSignatureOnClick={this.buttonSignatureOnClick}
+        />
+      }
+
+      {stepNumber === 6 &&
+        <div className="row justify-content-center mt-4">
+        <div className="col-12 col-md-6">
+          <div className="card">
+            <div className="card-header">
+              Confirmanos tu celular
+            </div>
+            <div className="row ml-2 mr-2">
+                <div className="col-4">
+                  <Input
+                    placeholder="C&oacute;d. de &Aacute;rea"
+                    type={types.NUMBER}
+                    forwardRef={this.areaCode}
+                    err={this.getErrors("areaCode")}
+                  ></Input>
+                </div>
+                <div className="col-8">
+                  <Input
+                    placeholder="Tel&eacute;fono"
+                    type={types.NUMBER}
+                    forwardRef={this.phoneNumber}
+                    err={this.getErrors("phoneNumber")}
+                  ></Input>
+                </div>
+              </div>
+              <div className="row ml-4 mb-4">
+                <div className="col-12 text-small">
+                  C&oacute;digo de &Aacute;rea sin 0 ni 15
+                </div>
+              </div>
+            </div>
+            <div className="col-12 text-center mt-4">
+              <button type="button" onClick={this.sendInfo}>Finalizar</button>
+            </div>
+          </div>
+          </div>
+      }
+
+      {stepNumber === 7 &&
+          <div className="row justify-content-center mt-4">
+          <div className="col-12 col-md-6 text-center">
+              <p><b>Completaste con &Eacute;xito esta validaci&oacute;n</b></p>
+              <p>&nbsp;</p>
+              <p>En breve te enviaremos un mensaje</p>
+              <p>&nbsp;</p>
+              <p>Saludos</p>
+              <p>&nbsp;</p>
+              <h3>Mutual Bicentenario</h3>
+          </div>
+        </div>  
+      }
+
+      {stepNumber === 20 &&
+        <React.Fragment>
+          <div className="row justify-content-center mt-4 text-center">
+            <div className="col-12 col-md-12">
+              <button type="button" className="btn btn-block btn-outline-success" onClick={!loading ? this.createPdf : undefined}>
+                {loading && <span className="spinner-border spinner-border-sm" role="status"></span>}
+                {!loading && "Enviar información"}
+              </button>
+            </div>
+          </div>
+          <div className="row justify-content-center mt-4">
+            <div className="col-12 col-md-6">
+              <div className="card">
+                <div className="card-header">
+                  Préstamo solicitado
+                </div>
+                <ul className="list-group list-group-flush text-left m-4">
+                    <p>Nombre: {userData.name + " " + userData.surname}</p>
+                    <p>Documento: {userData.documentNumber}</p>
+                    <p>Capital: {userData.capital}</p>
+                    <p>Plazo: {userData.plazo}</p>
+                    <p>Cuota: {userData.cuota}</p>
+                    <p>Neto: {userData.neto}</p>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="row justify-content-center mt-4">
+            <div className="col-12 col-md-6">
+              <div className="card">
+                <div className="card-header">
+                  Tu imagen
+                </div>
+                <ul className="list-group list-group-flush text-center">
+                  <li className="list-group-item">
+                    <img src={localStorage.getItem("userSelfie")} alt="Foto" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="row justify-content-center mt-4">
+            <div className="col-12 col-md-6">
+              <div className="card">
+                <div className="card-header">
+                  Tu firma
+                </div>
+                <ul className="list-group list-group-flush text-center">
+                  <li className="list-group-item">
+                    <img src={localStorage.getItem("userSignature")} alt="Selfie" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
+      }
+
+      {false &&
         <React.Fragment>
 
         <div className="row justify-content-center mt-4 align-items-center">
@@ -289,78 +429,7 @@ class HomePage extends HomeController {
             </div>
           </div>
         </div> */}
-        {showSignature &&
-          <Signature
-            buttonSignatureOnClick={this.buttonSignatureOnClick}
-          />
-        }
-        {!showSelfie &&
-          <Webcam
-            buttonSelfieOnClick={this.buttonSelfieOnClick}
-          />
-        }
-        {showUploadImages &&
-          <ImageUploaderAndResizer
-            buttonUploadImagesOnClick={this.buttonUploadImagesOnClick}
-          />
-        }
-        {allInfoOk &&
-          <React.Fragment>
-            <div className="row justify-content-center mt-4 text-center">
-              <div className="col-12 col-md-12">
-                <button type="button" className="btn btn-block btn-outline-success" onClick={!loading ? this.createPdf : undefined}>
-                  {loading && <span className="spinner-border spinner-border-sm" role="status"></span>}
-                  {!loading && "Enviar información"}
-                </button>
-              </div>
-            </div>
-            <div className="row justify-content-center mt-4">
-              <div className="col-12 col-md-6">
-                <div className="card">
-                  <div className="card-header">
-                    Préstamo solicitado
-                  </div>
-                  <ul className="list-group list-group-flush text-left m-4">
-                      <p>Nombre: {userData.name + " " + userData.surname}</p>
-                      <p>Documento: {userData.documentNumber}</p>
-                      <p>Capital: {userData.capital}</p>
-                      <p>Plazo: {userData.plazo}</p>
-                      <p>Cuota: {userData.cuota}</p>
-                      <p>Neto: {userData.neto}</p>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="row justify-content-center mt-4">
-              <div className="col-12 col-md-6">
-                <div className="card">
-                  <div className="card-header">
-                    Tu imagen
-                  </div>
-                  <ul className="list-group list-group-flush text-center">
-                    <li className="list-group-item">
-                      <img src={localStorage.getItem("userSelfie")} alt="Foto" />
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="row justify-content-center mt-4">
-              <div className="col-12 col-md-6">
-                <div className="card">
-                  <div className="card-header">
-                    Tu firma
-                  </div>
-                  <ul className="list-group list-group-flush text-center">
-                    <li className="list-group-item">
-                      <img src={localStorage.getItem("userSignature")} alt="Selfie" />
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </React.Fragment>
-        }
+
       </React.Fragment >
     );
   }

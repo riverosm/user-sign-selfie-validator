@@ -14,6 +14,11 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/validacion-usuario/" component={HomePage} />
+          <Route
+            exact
+            path="/validacion-usuario/:token/"
+            component={HomePage}
+          />
           {/* <Route exact path="/validacion-usuario/sign/" component={SignaturePage} />
           <Route exact path="/validacion-usuario/selfie/" component={WebcamPage} /> */}
         </Switch>

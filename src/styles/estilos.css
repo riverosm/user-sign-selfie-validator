@@ -45,6 +45,7 @@ IMG {
   z-index: 1000;
   width: 96%;
   background-color: white;
+  max-width: 600px;
 }
 
 .signaturePad {
@@ -254,3 +255,21 @@ textarea {
 .btn-outline-warning:not(:disabled):not(.disabled).active:focus, .btn-outline-warning:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-warning.dropdown-toggle:focus {
   box-shadow: 0 0 0 .2rem rgba(255,193,7,.5);
 } */
+
+#photoContent {position:relative;width:310px;height:190px; padding-left: 12px; padding-top: 0px;}
+#photoContent:before, #photoContent:after, #photoContent>:first-child:before, #photoContent>:first-child:after {
+    position:absolute;
+    width:80px; height: 80px;
+    border-color:red; /* or whatever colour */
+    border-style:solid; /* or whatever style */
+    content: ' ';
+    margin-top: -10px;
+}
+#photoContent:before {top:0;left:0;border-width: 1px 0 0 1px}
+#photoContent:after {top:0;right:0;border-width: 1px 1px 0 0}
+#photoContent>:first-child:before {bottom:0;right:0;border-width: 0 1px 1px 0}
+#photoContent>:first-child:after {bottom:0;left:0;border-width: 0 0 1px 1px}
+
+.card-header {
+  text-align: center;
+}

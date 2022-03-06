@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam";
+import { isMobile } from 'react-device-detect';
 
 class WebcamJS extends Component {
 
-  state = { imgURL: null }
+  state = { imgURL: null, height: 350, width: 400 }
 
   async componentDidMount() {
+    if (!isMobile) {
+      this.setState({
+        height: 210,
+        width: 330,
+      })
+    }
     this.checkWebCam();
   }
 
@@ -58,7 +65,7 @@ class WebcamJS extends Component {
 
   saveImage = () => {
     localStorage.setItem(
-      "userSelfie",
+      this.props.documentImg,
       this.state.imgURL
     );
 
@@ -69,10 +76,13 @@ class WebcamJS extends Component {
 
     let { imgURL } = this.state
 
+    let { documentPosition } = this.props;
+
     const videoConstraints = {
-      width: 400,
-      height: 400,
-      facingMode: "user" // "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
+      width: { max: this.state.width },
+      height: { max: this.state.height },
+      aspectRatio: 54 / 86,
+      facingMode: "environment" // "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
     };
 
     return (
@@ -83,23 +93,24 @@ class WebcamJS extends Component {
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
-                    Tu Selfie
+                    Foto de {documentPosition} del DNI
                   </div>
-                  <div className="col-12 col-md-6">
-                    <p>- De frente</p>
-                    <p>- Sin anteojos</p>
-                    <p>- Pod&eacute;s sonreir</p>
+                  <div className="row justify-content-center mt-4 mb-4">
+                    <div id="photoContent">
+                      <p>
+                        <Webcam
+                          audio={false}
+                          // height={this.state.height}
+                          // width={this.state.width}
+                          ref={this.webcamRef}
+                          screenshotFormat="image/jpeg"
+                          videoConstraints={videoConstraints}
+                        />
+                      </p>
+                    </div>
                   </div>
                   <div className="row justify-content-center m-2">
-                    <Webcam
-                      audio={false}
-                      height={240}
-                      ref={this.webcamRef}
-                      screenshotFormat="image/jpeg"
-                      width={380}
-                      videoConstraints={videoConstraints}
-                    />
-                    <button className="btn btn-block btn-outline-success mt-2" onClick={this.capture}>Capturar foto</button>
+                    <button className="btn btn-block btn-outline-success mt-2" onClick={this.capture}>Capturar</button>
                   </div>
                 </div>
               </div>
@@ -115,20 +126,24 @@ class WebcamJS extends Component {
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
-                    Tu Selfie
+                    Foto de {documentPosition} del DNI
+                  </div>
+                  <div className="row justify-content-center mt-4 mb-4">
+                    <div id="photoContent">
+                      <p>
+                        <img
+                          src={imgURL}
+                          alt="Foto" />
+                      </p>
+                    </div>
                   </div>
                   <div className="row justify-content-center m-2">
-                    <img
-                      src={imgURL}
-                      alt="Foto" />
-                  </div>
-                  <div className="row justify-content-center m-2">
-                    <div className="col-6 col-md-3">
+                    <div className="col-6">
                       <button className="btn btn-block btn-outline-secondary" onClick={this.clear}>
                         Limpiar
               </button>
                     </div>
-                    <div className="col-6 col-md-3">
+                    <div className="col-6">
                       <button className="btn btn-block btn-outline-success" onClick={this.saveImage}>
                         Continuar
               </button>

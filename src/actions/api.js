@@ -55,6 +55,14 @@ const api = {
       });
     },
   },
+  users: {
+    list(parameter) {
+      return callApi(`/users/`, {
+        method: "GET",
+        parameter,
+      });
+    },
+  },
 };
 
 export default api;

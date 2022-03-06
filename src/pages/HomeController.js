@@ -1,47 +1,68 @@
 import React from "react";
 import PageController from "./PageController.js";
 import pdfsApi from "../actions/pdfApi.js";
+import usersApi from "../actions/usersApi.js";
+// import { thisTypeAnnotation } from "@babel/types";
 // import validateFields from "../validations/homeValidation";
 
 class HomeController extends PageController {
-  name = React.createRef();
-  surname = React.createRef();
-  documentType = React.createRef();
-  documentNumber = React.createRef();
-  capital = React.createRef();
-  plazo = React.createRef();
-  cuota = React.createRef();
-  neto = React.createRef();
+  areaCode = React.createRef();
+  phoneNumber = React.createRef();
 
   constructor(props) {
     super(props);
 
     this.state = {
       loading: false,
-      showSignature: false,
-      showSelfie: false,
-      showThanks: false,
-      allInfoOk: false,
-      showUploadImages: false,
       errors: [],
       userData: [],
-      showInfo: false,
-      stepNumber: 1,
-      allAccepted: false,
+      stepNumber: null,
+      token: null,
     };
   }
+
   async componentDidMount() {
+
+    const { token } = this.props.match.params;
+
     localStorage.removeItem("userSignature");
     localStorage.removeItem("userSelfie");
     localStorage.removeItem("userDocumentFront");
     localStorage.removeItem("userDocumentBack");
     localStorage.removeItem("userData");
+
+    const { users } = await usersApi.get(`token=${token}`);
+
+    if (users && users.length === 1) {
+      const userData = users[0];
+
+      this.setState({
+        userData,
+        token: 'AXDKJD1240KJ',
+        stepNumber: 0,
+      })
+    } else {
+      this.setState({
+        stepNumber: -1,
+      })
+    }
   }
 
   /**
-   * Obtiene los datos de la oferta
+ * Transforma numero a formato de 2 decimales
+ */
+  convertNumber = (number) => {
+    return '$' + Number(number).toLocaleString("es", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  /**
+   * Obtiene los datos del usuario con el token
    */
   getUserData = () => {
+
     const userData = {
       name: this.name.current.value,
       surname: this.surname.current.value,
@@ -60,93 +81,67 @@ class HomeController extends PageController {
     return userData;
   };
 
-  showSelfie = () => {
-    this.setState({
-      showSelfie: true,
-    })
-  }
-
-  hideSelfie = () => {
-    this.setState({
-      showSelfie: false,
-    })
-  }
-
-  showSignature = () => {
-    this.setState({
-      showSignature: true,
-    })
-  }
-
-  hideSignature = () => {
-    this.setState({
-      showSignature: false,
-    })
-  }
-
   showInfo = () => {
     this.setState({
-      showInfo: true,
-    })
-  }
-
-  hideInfo = () => {
-    this.setState({
-      showInfo: false,
+      stepNumber: 1,
     })
   }
 
   showUploadImages = () => {
-
     this.setState({
-      showUploadImages: true,
       stepNumber: 2,
     })
 
     // return;
 
-  // const userData = this.getUserData();
+    // const userData = this.getUserData();
 
-  // const errors = validateFields(userData);
+    // const errors = validateFields(userData);
 
-  // if (errors.length === 0) {
-  //   localStorage.setItem(
-  //     "userData",
-  //     JSON.stringify((userData))
-  //   );
-  //   this.setState({
-  //     showUploadImages: true,
-  //   })
-  // } else {
-  //   this.setState({ errors });
-  // }
+    // if (errors.length === 0) {
+    //   localStorage.setItem(
+    //     "userData",
+    //     JSON.stringify((userData))
+    //   );
+    //   this.setState({
+    //     showUploadImages: true,
+    //   })
+    // } else {
+    //   this.setState({ errors });
+    // }
   }
 
-  hideUploadImages = () => {
+
+  buttonFrontDocumentOnClick = () => {
     this.setState({
-      showUploadImages: false,
+      stepNumber: 3,
+    })
+  }
+
+  buttonRearDocumentOnClick = () => {
+    this.setState({
+      stepNumber: 4,
     })
   }
 
   buttonSelfieOnClick = () => {
-    this.hideSelfie();
-    this.showSignature();
-  }
-
-  buttonSignatureOnClick = () => {
-    this.hideSignature();
     this.setState({
-      allInfoOk: true,
+      stepNumber: 5,
     })
   }
 
-  buttonUploadImagesOnClick = () => {
-    this.hideUploadImages();
-    this.showSelfie();
+  buttonSignatureOnClick = () => {
+    this.setState({
+      stepNumber: 6,
+    })
   }
 
-  isAllAccepted = () => {
-    return true;
+  sendInfo = () => {
+    this.setState({
+      stepNumber: 7,
+    })
+
+    this.createPdf();
   }
 
   createPdf = async () => {
@@ -155,7 +150,9 @@ class HomeController extends PageController {
       selfie: localStorage.getItem("userSelfie"),
       documentFront: localStorage.getItem("userDocumentFront"),
       documentBack: localStorage.getItem("userDocumentBack"),
-      userData: localStorage.getItem("userData"),
+      areaCode: this.areaCode.current.value,
+      phoneNumber: this.phoneNumber.current.value,
+      token: this.state.token,
     }
 
     this.setState({
