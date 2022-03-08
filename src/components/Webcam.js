@@ -95,7 +95,7 @@ class WebcamJS extends Component {
                       audio={false}
                       height={240}
                       ref={this.webcamRef}
-                      screenshotFormat="image/jpeg"
+                      screenshotFormat="image/png"
                       width={380}
                       videoConstraints={videoConstraints}
                     />
