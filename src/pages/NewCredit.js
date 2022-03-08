@@ -16,8 +16,8 @@ class NewCredit extends NewCreditController {
             <div className="col-12 col-md-6 text-center alert-success rounded p-4">
               <p><b>Nuevo crédito cargado con éxito</b></p>
               <p>&nbsp;</p>
-              <p>URL validación: <a href={"https://www.financiaonline.com.ar/validacion-usuario/" + newToken}>
-                https://www.financiaonline.com.ar/validacion-usuario/{newToken}
+              <p>URL validación: <a href={"https://www.financiaonline.com.ar/validacion-usuario/" + newToken + "/"}>
+                https://www.financiaonline.com.ar/validacion-usuario/{newToken}/
               </a></p>
             </div>
           </div>
