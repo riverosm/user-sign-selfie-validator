@@ -26,7 +26,7 @@ class HomePage extends HomeController {
             <h3>Mutual Bicentenario</h3>
         </div>
         <div className="col-12 text-center mt-4">
-            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '100px' }} alt="Logo" />
+            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '80px' }} alt="Logo" />
           </div>
           <div className="col-12 text-center mt-4">
               El usuario no existe
@@ -43,7 +43,7 @@ class HomePage extends HomeController {
               <h3>Mutual Bicentenario</h3>
           </div>
           <div className="col-12 text-center mt-4">
-            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '100px' }} alt="Logo" />
+            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '80px' }} alt="Logo" />
           </div>
           <div className="col-12 text-center mt-4">
               Queremos hacerte la vida más fácil
@@ -184,6 +184,8 @@ class HomePage extends HomeController {
               <p>En breve te enviaremos un mensaje</p>
               <p>&nbsp;</p>
               <p>Saludos</p>
+              <p>&nbsp;</p>
+              <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '80px' }} alt="Logo" />
               <p>&nbsp;</p>
               <h3>Mutual Bicentenario</h3>
           </div>

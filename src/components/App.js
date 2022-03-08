@@ -15,7 +15,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/validacion-usuario/" component={HomePage} />
-          <Route exact path="/agregar/" component={NewCredit} />
+          <Route exact path="/validacion-usuario/agregar/" component={NewCredit} />
           <Route
             exact
             path="/validacion-usuario/:token/"
