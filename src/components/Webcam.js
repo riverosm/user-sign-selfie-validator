@@ -58,7 +58,7 @@ class WebcamJS extends Component {
 
   saveImage = () => {
     localStorage.setItem(
-      "userSelfie",
+      this.props.documentImg,
       this.state.imgURL
     );
 
@@ -72,7 +72,7 @@ class WebcamJS extends Component {
     const videoConstraints = {
       width: 400,
       height: 400,
-      facingMode: "user" // "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
+      facingMode: this.props.camera // "user" or "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
     };
 
     return (

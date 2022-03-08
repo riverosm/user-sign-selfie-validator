@@ -111,10 +111,15 @@ class HomePage extends HomeController {
       }
 
       {stepNumber === 2 &&
-        <WebcamPhoto
+        // <WebcamPhoto
+        //   buttonOnClick={this.buttonFrontDocumentOnClick}
+        //   documentPosition={"Frente"}
+        //   documentImg={"userDocumentFront"}
+        // />
+        <Webcam
           buttonOnClick={this.buttonFrontDocumentOnClick}
-          documentPosition={"Frente"}
           documentImg={"userDocumentFront"}
+          camera={"environment"}
         />
       }
 
@@ -129,6 +134,8 @@ class HomePage extends HomeController {
       {stepNumber === 4 &&
         <Webcam
           buttonOnClick={this.buttonSelfieOnClick}
+          documentImg={"userSelfie"}
+          camera={"user"}
         />
       }
 
