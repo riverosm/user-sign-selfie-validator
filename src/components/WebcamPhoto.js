@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 class WebcamJS extends Component {
 
-  state = { imgURL: null, height: 350, width: 400 }
+  state = { imgURL: null, height: 180, width: 280 }
 
   async componentDidMount() {
     if (!isMobile) {
@@ -79,8 +79,8 @@ class WebcamJS extends Component {
     let { documentPosition } = this.props;
 
     const videoConstraints = {
-      width: { max: this.state.width },
-      height: { max: this.state.height },
+      width: { max: 800 },
+      // height: { max: this.state.height },
       aspectRatio: 54 / 86,
       facingMode: "environment" // "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
     };
@@ -100,11 +100,12 @@ class WebcamJS extends Component {
                       <p>
                         <Webcam
                           audio={false}
-                          // height={this.state.height}
-                          // width={this.state.width}
+                          height={this.state.height}
+                          width={this.state.width}
                           ref={this.webcamRef}
-                          screenshotFormat="image/jpeg"
+                          screenshotFormat="image/png"
                           videoConstraints={videoConstraints}
+                          forceScreenshotSourceSize={true}
                         />
                       </p>
                     </div>

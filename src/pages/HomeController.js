@@ -18,6 +18,7 @@ class HomeController extends PageController {
       userData: [],
       stepNumber: null,
       token: null,
+      cameraPermission: false,
     };
   }
 
@@ -142,6 +143,22 @@ class HomeController extends PageController {
     })
 
     this.createPdf();
+  }
+
+  checkCameraPermissions = () => {
+    const permissions = navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+    permissions.then((stream) => {
+      this.setState({
+        cameraPermission: true
+      })
+      stream.getTracks().forEach(track => {
+        track.stop();
+      });
+    }).catch((err) => {
+      this.setState({
+        cameraPermission: false
+      })
+    });
   }
 
   createPdf = async () => {

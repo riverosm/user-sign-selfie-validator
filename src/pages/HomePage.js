@@ -12,7 +12,7 @@ import { types } from "../models/inputs";
 
 class HomePage extends HomeController {
   render() {
-    const { loading, userData, stepNumber } = this.state;
+    const { loading, userData, stepNumber, cameraPermission } = this.state;
 
     return (
       <React.Fragment>
@@ -26,7 +26,7 @@ class HomePage extends HomeController {
             <h3>Mutual Bicentenario</h3>
         </div>
         <div className="col-12 text-center mt-4">
-            <img src={Logo192} style={{ border: 'solid 0px' }} alt="Logo" />
+            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '100px' }} alt="Logo" />
           </div>
           <div className="col-12 text-center mt-4">
               El usuario no existe
@@ -43,13 +43,19 @@ class HomePage extends HomeController {
               <h3>Mutual Bicentenario</h3>
           </div>
           <div className="col-12 text-center mt-4">
-            <img src={Logo192} style={{ border: 'solid 0px' }} alt="Logo" />
+            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '100px' }} alt="Logo" />
           </div>
           <div className="col-12 text-center mt-4">
               Queremos hacerte la vida más fácil
           </div>
           <div className="col-12 text-center mt-4">
-            <button type="button" onClick={this.showInfo}>Continuar</button>
+            <div className="custom-switch">
+              <input type="checkbox" className="custom-control-input" id="acceptCamera" checked={cameraPermission} />
+              <label className="custom-control-label" htmlFor="acceptCamera" onClick={this.checkCameraPermissions}>Acepto acceso a mi c&aacute;mara para la validaci&oacute;n</label>
+            </div>
+          </div>
+          <div className="col-12 text-center mt-4">
+            <button type="button" onClick={this.showInfo} disabled={!cameraPermission}>Continuar</button>
           </div>
         </div>
       }
