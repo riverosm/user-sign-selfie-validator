@@ -1,13 +1,13 @@
 import { labels, isNull } from "./utils";
 
-const validateFields = (userData) => {
+const validateFields = (creditData) => {
   let errors = [];
 
-  if (isNull(userData.name)) {
+  if (isNull(creditData.name)) {
     errors.push({ field: "name", message: labels.REQUIRED });
   }
 
-  if (isNull(userData.surname)) {
+  if (isNull(creditData.surname)) {
     errors.push({ field: "surname", message: labels.REQUIRED });
   }
 

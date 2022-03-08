@@ -55,11 +55,17 @@ const api = {
       });
     },
   },
-  users: {
+  credits: {
     list(parameter) {
-      return callApi(`/users/`, {
+      return callApi(`/credits/`, {
         method: "GET",
         parameter,
+      });
+    },
+    create(data) {
+      return callApi(`/credits/add/`, {
+        method: "POST",
+        body: JSON.stringify(data),
       });
     },
   },

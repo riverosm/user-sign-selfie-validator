@@ -12,7 +12,7 @@ import { types } from "../models/inputs";
 
 class HomePage extends HomeController {
   render() {
-    const { loading, userData, stepNumber, cameraPermission } = this.state;
+    const { loading, creditData, stepNumber, cameraPermission } = this.state;
 
     return (
       <React.Fragment>
@@ -79,13 +79,13 @@ class HomePage extends HomeController {
                 Validación de datos principales
               </div>
               <ul className="list-group list-group-flush text-left m-4">
-                  <p>Nombre y apellido: <b>{userData.name + " " + userData.surname}</b></p>
-                  <p>Documento: <b>{userData.documentNumber}</b></p>
+                  <p>Nombre y apellido: <b>{creditData.name + " " + creditData.surname}</b></p>
+                  <p>Documento: <b>{creditData.documentNumber}</b></p>
                   <p>&nbsp;</p>
-                  <p>Cuota final: <b>{this.convertNumber(userData.capital)}</b></p>
-                  <p>Plazo: <b>{userData.plazo}</b></p>
-                  <p>Neto a recibir: <b>{this.convertNumber(userData.neto)}</b></p>
-                  <p>Primer Vto Haberes: <b>{this.convertNumber(userData.cuota)}</b></p>
+                  <p>Cuota final: <b>{this.convertNumber(creditData.capital)}</b></p>
+                  <p>Plazo: <b>{creditData.plazo}</b></p>
+                  <p>Neto a recibir: <b>{this.convertNumber(creditData.neto)}</b></p>
+                  <p>Primer Vto Haberes: <b>{this.convertNumber(creditData.cuota)}</b></p>
                   <p>&nbsp;</p>
                   <div className="custom-switch">
                     <input type="checkbox" className="custom-control-input" id="acceptTerms" />
@@ -207,12 +207,12 @@ class HomePage extends HomeController {
                   Préstamo solicitado
                 </div>
                 <ul className="list-group list-group-flush text-left m-4">
-                    <p>Nombre: {userData.name + " " + userData.surname}</p>
-                    <p>Documento: {userData.documentNumber}</p>
-                    <p>Capital: {userData.capital}</p>
-                    <p>Plazo: {userData.plazo}</p>
-                    <p>Cuota: {userData.cuota}</p>
-                    <p>Neto: {userData.neto}</p>
+                    <p>Nombre: {creditData.name + " " + creditData.surname}</p>
+                    <p>Documento: {creditData.documentNumber}</p>
+                    <p>Capital: {creditData.capital}</p>
+                    <p>Plazo: {creditData.plazo}</p>
+                    <p>Cuota: {creditData.cuota}</p>
+                    <p>Neto: {creditData.neto}</p>
                 </ul>
               </div>
             </div>

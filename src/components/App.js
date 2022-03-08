@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from './Layout.js';
 
 import HomePage from '../pages/HomePage.js';
+import NewCredit from '../pages/NewCredit.js';
 // import SignaturePage from '../pages/SignaturePage.js';
 // import WebcamPage from '../pages/WebcamPage.js';
 
@@ -14,6 +15,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/validacion-usuario/" component={HomePage} />
+          <Route exact path="/agregar/" component={NewCredit} />
           <Route
             exact
             path="/validacion-usuario/:token/"

@@ -1,7 +1,7 @@
 import React from "react";
 import PageController from "./PageController.js";
 import pdfsApi from "../actions/pdfApi.js";
-import usersApi from "../actions/usersApi.js";
+import creditsApi from "../actions/creditsApi.js";
 // import { thisTypeAnnotation } from "@babel/types";
 // import validateFields from "../validations/homeValidation";
 
@@ -15,7 +15,7 @@ class HomeController extends PageController {
     this.state = {
       loading: false,
       errors: [],
-      userData: [],
+      creditData: [],
       stepNumber: null,
       token: null,
       cameraPermission: false,
@@ -30,16 +30,16 @@ class HomeController extends PageController {
     localStorage.removeItem("userSelfie");
     localStorage.removeItem("userDocumentFront");
     localStorage.removeItem("userDocumentBack");
-    localStorage.removeItem("userData");
+    localStorage.removeItem("creditData");
 
-    const { users } = await usersApi.get(`token=${token}`);
+    const { credits } = await creditsApi.get(`token=${token}`);
 
-    if (users && users.length === 1) {
-      const userData = users[0];
+    if (credits && credits.length === 1) {
+      const creditData = credits[0];
 
       this.setState({
-        userData,
-        token: 'AXDKJD1240KJ',
+        creditData,
+        token: {token},
         stepNumber: 0,
       })
     } else {
@@ -62,9 +62,9 @@ class HomeController extends PageController {
   /**
    * Obtiene los datos del usuario con el token
    */
-  getUserData = () => {
+  getcreditData = () => {
 
-    const userData = {
+    const creditData = {
       name: this.name.current.value,
       surname: this.surname.current.value,
       documentType: this.documentType.current.value,
@@ -76,10 +76,10 @@ class HomeController extends PageController {
     };
 
     this.setState({
-      userData
+      creditData
     })
 
-    return userData;
+    return creditData;
   };
 
   showInfo = () => {
@@ -95,14 +95,14 @@ class HomeController extends PageController {
 
     // return;
 
-    // const userData = this.getUserData();
+    // const creditData = this.getcreditData();
 
-    // const errors = validateFields(userData);
+    // const errors = validateFields(creditData);
 
     // if (errors.length === 0) {
     //   localStorage.setItem(
-    //     "userData",
-    //     JSON.stringify((userData))
+    //     "creditData",
+    //     JSON.stringify((creditData))
     //   );
     //   this.setState({
     //     showUploadImages: true,
