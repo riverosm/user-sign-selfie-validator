@@ -83,13 +83,15 @@ class WebcamJS extends Component {
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
-                    Tu Selfie
+                    {this.props.title}
                   </div>
-                  <div className="col-12 col-md-6">
-                    <p>- De frente</p>
-                    <p>- Sin anteojos</p>
-                    <p>- Pod&eacute;s sonreir</p>
-                  </div>
+                  {this.props.showSelfieData &&
+                    <div className="col-12 col-md-6">
+                      <p>- De frente</p>
+                      <p>- Sin anteojos</p>
+                      <p>- Pod&eacute;s sonreir</p>
+                    </div>
+                  }
                   <div className="row justify-content-center m-2">
                     <Webcam
                       audio={false}
@@ -115,7 +117,7 @@ class WebcamJS extends Component {
               <div className="col-12 col-md-6">
                 <div className="card">
                   <div className="card-header">
-                    Tu Selfie
+                    {this.props.title}
                   </div>
                   <div className="row justify-content-center m-2">
                     <img

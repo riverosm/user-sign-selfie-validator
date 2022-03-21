@@ -2,7 +2,7 @@ import React from 'react';
 import HomeController from './HomeController.js';
 import Signature from '../components/Signature.js';
 import Webcam from '../components/Webcam.js';
-import WebcamPhoto from '../components/WebcamPhoto.js';
+// import WebcamPhoto from '../components/WebcamPhoto.js';
 // import ImageUploaderAndResizer from '../components/ImageUploaderAndResizer.js';
 // import LogoMutual from '../images/cropped-LogoMutual21-170x56.jpeg';
 // import Logo512 from '../images/logo512.png';
@@ -119,14 +119,23 @@ class HomePage extends HomeController {
           buttonOnClick={this.buttonFrontDocumentOnClick}
           documentImg={"userDocumentFront"}
           camera={"environment"}
+          title={"Foto de frente del DNI"}
+          showSelfieData={false}
         />
       }
 
       {stepNumber === 3 &&
-        <WebcamPhoto
-          buttonOnClick={this.buttonRearDocumentOnClick}
-          documentPosition={"Dorso"}
+        // <WebcamPhoto
+        //   buttonOnClick={this.buttonRearDocumentOnClick}
+        //   documentPosition={"Dorso"}
+        //   documentImg={"userDocumentBack"}
+        // />
+        <Webcam
+          buttonOnClick={this.buttonFrontDocumentOnClick}
           documentImg={"userDocumentBack"}
+          camera={"environment"}
+          title={"Foto de dorso del DNI"}
+          showSelfieData={false}
         />
       }
 
@@ -135,6 +144,8 @@ class HomePage extends HomeController {
           buttonOnClick={this.buttonSelfieOnClick}
           documentImg={"userSelfie"}
           camera={"user"}
+          title={"Tu Selfie"}
+          showSelfieData={true}
         />
       }
 
