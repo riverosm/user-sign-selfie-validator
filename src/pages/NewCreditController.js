@@ -5,14 +5,10 @@ import validateFields from "../validations/homeValidation";
 
 class NewCreditController extends PageController {
   name = React.createRef();
-  surname = React.createRef();
-  documentType = React.createRef();
   documentNumber = React.createRef();
   cuotaFinal = React.createRef();
   plazo = React.createRef();
   neto = React.createRef();
-  vtoHaberes = React.createRef();
-  CBU = React.createRef();
 
   constructor(props) {
     super(props);
@@ -22,6 +18,8 @@ class NewCreditController extends PageController {
       errors: [],
       newToken: '',
       showError: false,
+      // Borrar
+      isLogged: false,
     };
   }
 
@@ -36,14 +34,10 @@ class NewCreditController extends PageController {
 
     const creditData = {
       name: this.name.current.value,
-      surname: this.surname.current.value,
-      documentType: this.documentType.current.value,
       documentNumber: this.documentNumber.current.value,
       cuotaFinal: this.cuotaFinal.current.value,
       plazo: this.plazo.current.value,
       neto: this.neto.current.value,
-      vtoHaberes: this.vtoHaberes.current.value,
-      CBU: this.CBU.current.value,
     };
 
     return creditData;
@@ -75,6 +69,21 @@ class NewCreditController extends PageController {
       }
     } else {
       this.setState({ errors });
+    }
+  }
+
+  // Borrar una vez realizado bien el login
+  loginEmail = React.createRef();
+  loginPassword = React.createRef();
+
+  loginNow = () => {
+    if (this.loginEmail.current.value === "canal1@mutualbicentenario.com" && this.loginPassword.current.value === "password") {
+      this.setState({
+        isLogged: true,
+      })
+    } else {
+      this.loginEmail.current.value = '';
+      this.loginPassword.current.value = '';
     }
   }
 }

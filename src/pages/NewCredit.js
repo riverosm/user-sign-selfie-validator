@@ -6,7 +6,44 @@ import NewCreditController from './NewCreditController.js';
 
 class NewCredit extends NewCreditController {
   render() {
-    const { loading, newToken, showError } = this.state;
+    const { loading, newToken, showError, isLogged } = this.state;
+
+    if (!isLogged) {
+      return (
+        <React.Fragment>
+          <div className="row justify-content-center mt-4">
+            <div className="col-12 col-md-6">
+              <div className="card">
+                <div className="card-header">
+                  Ingreso al sistema
+            </div>
+                <div className="row ml-2 mr-2">
+                  <div className="col-md-12">
+                    <Input
+                      placeholder="E-mail"
+                      type={types.TEXT}
+                      forwardRef={this.loginEmail}
+                    ></Input>
+                  </div>
+                </div>
+                <div className="row ml-2 mr-2">
+                  <div className="col-md-12">
+                    <Input
+                      placeholder="Password"
+                      type={types.PASSWORD}
+                      forwardRef={this.loginPassword}
+                    ></Input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 text-center mt-4">
+            <button type="button" onClick={this.loginNow}>Ingresar</button>
+          </div>
+        </React.Fragment>
+      )
+    }
 
     return (
       <React.Fragment>
@@ -40,33 +77,17 @@ class NewCredit extends NewCreditController {
                     Información del solicitante
             </div>
                   <div className="row ml-2 mr-2">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <Input
-                        placeholder="Nombre(s)"
+                        placeholder="Denominación"
                         type={types.TEXT}
                         forwardRef={this.name}
                         err={this.getErrors("name")}
                       ></Input>
                     </div>
-                    <div className="col-md-6">
-                      <Input
-                        placeholder="Apellido(s)"
-                        type={types.TEXT}
-                        forwardRef={this.surname}
-                        err={this.getErrors("surname")}
-                      ></Input>
-                    </div>
                   </div>
                   <div className="row ml-2 mr-2">
-                    <div className="col-md-6">
-                      <select ref={this.documentType} disabled>
-                        {/* <option value="1">Seleccione tipo de documento ...</option> */}
-                        <option value="1">DNI</option>
-                        <option value="1">CI</option>
-                        <option value="1">LE</option>
-                      </select>
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <Input
                         placeholder="Nro. Documento"
                         type={types.TEXT}
@@ -87,7 +108,7 @@ class NewCredit extends NewCreditController {
                     Información del crédito
             </div>
                   <div className="row ml-2 mr-2">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <Input
                         placeholder="Cuota final"
                         type={types.NUMBER}
@@ -95,7 +116,9 @@ class NewCredit extends NewCreditController {
                         err={this.getErrors("cuotaFinal")}
                       ></Input>
                     </div>
-                    <div className="col-md-6">
+                  </div>
+                  <div className="row ml-2 mr-2">
+                    <div className="col-md-12">
                       <Input
                         placeholder="Plazo"
                         type={types.NUMBER}
@@ -105,7 +128,7 @@ class NewCredit extends NewCreditController {
                     </div>
                   </div>
                   <div className="row ml-2 mr-2">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                       <Input
                         placeholder="Neto"
                         type={types.NUMBER}
@@ -113,27 +136,7 @@ class NewCredit extends NewCreditController {
                         err={this.getErrors("neto")}
                       ></Input>
                     </div>
-                    <div className="col-md-6">
-                      <Input
-                        placeholder="Próximo Vto. Haberes"
-                        type={types.NUMBER}
-                        forwardRef={this.vtoHaberes}
-                        err={this.getErrors("vtoHaberes")}
-                      ></Input>
-                    </div>
                   </div>
-
-                  <div className="row ml-2 mr-2">
-                    <div className="col-md-12">
-                      <Input
-                        placeholder="CBU"
-                        type={types.NUMBER}
-                        forwardRef={this.CBU}
-                        err={this.getErrors("CBU")}
-                      ></Input>
-                    </div>
-                  </div>
-
                 </div>
               </div>
             </div>

@@ -59,29 +59,6 @@ class HomeController extends PageController {
     });
   }
 
-  /**
-   * Obtiene los datos del usuario con el token
-   */
-  getcreditData = () => {
-
-    const creditData = {
-      name: this.name.current.value,
-      surname: this.surname.current.value,
-      documentType: this.documentType.current.value,
-      documentNumber: this.documentNumber.current.value,
-      capital: this.capital.current.value,
-      plazo: this.plazo.current.value,
-      cuota: this.cuota.current.value,
-      neto: this.neto.current.value,
-    };
-
-    this.setState({
-      creditData
-    })
-
-    return creditData;
-  };
-
   showInfo = () => {
     this.setState({
       stepNumber: 1,
