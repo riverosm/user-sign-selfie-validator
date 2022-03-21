@@ -131,7 +131,7 @@ class HomePage extends HomeController {
         //   documentImg={"userDocumentBack"}
         // />
         <Webcam
-          buttonOnClick={this.buttonFrontDocumentOnClick}
+          buttonOnClick={this.buttonBackDocumentOnClick}
           documentImg={"userDocumentBack"}
           camera={"environment"}
           title={"Foto de dorso del DNI"}
