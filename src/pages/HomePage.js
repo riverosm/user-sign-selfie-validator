@@ -165,7 +165,7 @@ class HomePage extends HomeController {
             <div className="row ml-2 mr-2">
                 <div className="col-4">
                   <Input
-                    placeholder="C&oacute;d. de &Aacute;rea"
+                    placeholder="362"
                     type={types.NUMBER}
                     forwardRef={this.areaCode}
                     err={this.getErrors("areaCode")}
@@ -173,7 +173,7 @@ class HomePage extends HomeController {
                 </div>
                 <div className="col-8">
                   <Input
-                    placeholder="Tel&eacute;fono"
+                    placeholder="XXXXXXX"
                     type={types.NUMBER}
                     forwardRef={this.phoneNumber}
                     err={this.getErrors("phoneNumber")}
