@@ -77,7 +77,13 @@ class NewCreditController extends PageController {
   loginPassword = React.createRef();
 
   loginNow = () => {
-    if (this.loginEmail.current.value === "canal1@mutualbicentenario.com" && this.loginPassword.current.value === "password") {
+    if (
+      (this.loginEmail.current.value === "jgonzalez_81@hotmail.com" ||
+      this.loginEmail.current.value === "karyvonka_73@hotmail.com" ||
+      this.loginEmail.current.value === "marcejav@hotmail.com" ||
+      this.loginEmail.current.value === "mfernandez@mutualbicentenario.com" ||
+      this.loginEmail.current.value === "vsena@mutualbicentenario.com")
+       && this.loginPassword.current.value === "password") {
       this.setState({
         isLogged: true,
       })
