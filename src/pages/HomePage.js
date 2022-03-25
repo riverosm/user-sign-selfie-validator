@@ -84,7 +84,7 @@ class HomePage extends HomeController {
                   <p>&nbsp;</p>
                   <p>Cuota final: <b>{this.convertNumber(creditData.cuotaFinal)}</b></p>
                   <p>Plazo: <b>{creditData.plazo}</b></p>
-                  <p>Neto a recibir: <b>{this.convertNumber(creditData.neto)}</b></p>
+                  <p>A recibir: <b>{this.convertNumber(creditData.neto)}</b></p>
                   <p>&nbsp;</p>
                   <div className="custom-switch">
                     <input type="checkbox" className="custom-control-input" id="acceptTerms" />

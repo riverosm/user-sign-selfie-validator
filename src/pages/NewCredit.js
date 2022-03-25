@@ -130,7 +130,7 @@ class NewCredit extends NewCreditController {
                   <div className="row ml-2 mr-2">
                     <div className="col-md-12">
                       <Input
-                        placeholder="Neto"
+                        placeholder="A recibir"
                         type={types.NUMBER}
                         forwardRef={this.neto}
                         err={this.getErrors("neto")}
