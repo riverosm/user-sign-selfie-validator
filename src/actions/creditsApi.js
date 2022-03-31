@@ -15,14 +15,14 @@ const creditsApi = () => {
     }
   }
 
-  async function add(credit) {
-    try {
-      const response = await api.credits.create(credit);
-      return { loading: false, response: response.data, error: null };
-    } catch (error) {
-      return { loading: false, response: [], error };
-    }
-  }
+  // async function add(credit) {
+  //   try {
+  //     const response = await api.credits.create(credit);
+  //     return { loading: false, response: response.data, error: null };
+  //   } catch (error) {
+  //     return { loading: false, response: [], error };
+  //   }
+  // }
 
   // async function edit(credit) {
   //   try {
