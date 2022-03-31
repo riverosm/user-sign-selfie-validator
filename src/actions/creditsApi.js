@@ -44,7 +44,7 @@ const creditsApi = () => {
 
   return {
     get,
-    add,
+    // add,
     // edit,
     // remove,
   };

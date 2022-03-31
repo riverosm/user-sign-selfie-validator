@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://financiaonline.com.ar/validacion-usuario/api/";
+const BASE_URL = "https://financiaonline.com.ar/admin/api/";
 
 async function callApi(endpoint, options = {}) {
   let restdb = await axios.create({
@@ -47,9 +47,9 @@ async function callApi(endpoint, options = {}) {
 }
 
 const api = {
-  pdfs: {
+  validations: {
     create(data) {
-      return callApi(`/addPdf/`, {
+      return callApi(`validate.php`, {
         method: "POST",
         body: JSON.stringify(data),
       });
@@ -57,15 +57,9 @@ const api = {
   },
   credits: {
     list(parameter) {
-      return callApi(`/credits/`, {
+      return callApi(`get.php`, {
         method: "GET",
         parameter,
-      });
-    },
-    create(data) {
-      return callApi(`/credits/add/`, {
-        method: "POST",
-        body: JSON.stringify(data),
       });
     },
   },
