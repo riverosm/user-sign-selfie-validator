@@ -12,12 +12,12 @@ import { types } from "../models/inputs";
 
 class HomePage extends HomeController {
   render() {
-    const { creditData, stepNumber, cameraPermission } = this.state;
+    const { creditData, stepNumber, cameraPermission, realStep, totalSteps, askCameraPermission, alreadyValidated } = this.state;
 
     return (
       <React.Fragment>
 
-      {stepNumber < 0 && 
+      {stepNumber < 0 &&
         <div className="row justify-content-center mt-4">
         <div className="col-12 text-center">
             Bienvenido a
@@ -34,7 +34,24 @@ class HomePage extends HomeController {
         </div>
       }
 
-      {stepNumber === 0 && 
+      {alreadyValidated &&
+        <div className="row justify-content-center mt-4">
+        <div className="col-12 text-center">
+            Bienvenido a
+        </div>
+        <div className="col-12 text-center mt-4">
+            <h3>Mutual Bicentenario</h3>
+        </div>
+        <div className="col-12 text-center mt-4">
+            <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '80px' }} alt="Logo" />
+          </div>
+          <div className="col-12 text-center mt-4">
+              Validación realizada con éxito
+          </div>
+        </div>
+      }
+
+      {stepNumber === 0 && !alreadyValidated &&
         <div className="row justify-content-center mt-4">
           <div className="col-12 text-center">
               Bienvenido a
@@ -48,14 +65,17 @@ class HomePage extends HomeController {
           <div className="col-12 text-center mt-4">
               Queremos hacerte la vida más fácil
           </div>
-          <div className="col-12 text-center mt-4">
+          <div className="col-12 text-center mt-4" hidden={!askCameraPermission}>
             <div className="custom-switch">
               <input type="checkbox" className="custom-control-input" id="acceptCamera" checked={cameraPermission} />
               <label className="custom-control-label" htmlFor="acceptCamera" onClick={this.checkCameraPermissions}>Acepto acceso a mi c&aacute;mara para la validaci&oacute;n</label>
             </div>
           </div>
-          <div className="col-12 text-center mt-4">
+          <div className="col-12 text-center mt-4" hidden={!askCameraPermission}>
             <button type="button" onClick={this.showInfo} disabled={!cameraPermission}>Continuar</button>
+          </div>
+          <div className="col-12 text-center mt-4" hidden={askCameraPermission}>
+            <button type="button" onClick={this.showInfo}>Continuar</button>
           </div>
         </div>
       }
@@ -66,7 +86,7 @@ class HomePage extends HomeController {
             <img src={Logo192} style={{ border: 'solid 0px', width: '40px' }} alt="Logo" />
           </div>
           <div className="col-6 text-center">
-            Paso {stepNumber} de 6
+            Paso {realStep} de {totalSteps}
           </div>
         </div>
       }
@@ -87,22 +107,34 @@ class HomePage extends HomeController {
                   <p>A recibir: <b>{this.convertNumber(creditData.neto)}</b></p>
                   <p>&nbsp;</p>
                   <div className="custom-switch">
-                    <input type="checkbox" className="custom-control-input" id="acceptTerms" />
+                    <input type="checkbox" className="custom-control-input" id="acceptTerms" ref="acceptTerms" />
                     <label className="custom-control-label" htmlFor="acceptTerms">Acepto Términos y Condiciones</label>
+                    <small className="text-small text-danger">
+                      &nbsp;&nbsp;{this.getErrors("acceptTerms").map((err) => err.message)}
+                      &nbsp;
+                    </small>
                   </div>
                   <div className="custom-switch">
-                    <input type="checkbox" className="custom-control-input" id="acceptPerson" />
+                    <input type="checkbox" className="custom-control-input" id="acceptPerson" ref="acceptPerson" />
                     <label className="custom-control-label" htmlFor="acceptPerson">No soy Persona Políticamente Expuesa</label>
+                    <small className="text-small text-danger">
+                      &nbsp;&nbsp;{this.getErrors("acceptPerson").map((err) => err.message)}
+                      &nbsp;
+                    </small>
                   </div>
                   <div className="custom-switch">
-                    <input type="checkbox" className="custom-control-input" id="acceptSujet" />
+                    <input type="checkbox" className="custom-control-input" id="acceptSujet" ref="acceptSujet" />
                     <label className="custom-control-label" htmlFor="acceptSujet">No soy Sujeto Obligado</label>
+                    <small className="text-small text-danger">
+                      &nbsp;&nbsp;{this.getErrors("acceptSujet").map((err) => err.message)}
+                      &nbsp;
+                    </small>
                   </div>
               </ul>
             </div>
 
             <div className="col-12 text-center mt-4">
-              <button type="button" onClick={this.showUploadImages} disabled={false}>Continuar</button>
+              <button type="button" onClick={this.nextStep} disabled={false}>Continuar</button>
             </div>
 
         </div>
@@ -116,7 +148,7 @@ class HomePage extends HomeController {
         //   documentImg={"userDocumentFront"}
         // />
         <Webcam
-          buttonOnClick={this.buttonFrontDocumentOnClick}
+          buttonOnClick={this.nextStep}
           documentImg={"userDocumentFront"}
           camera={"environment"}
           title={"Foto de frente del DNI"}
@@ -131,7 +163,7 @@ class HomePage extends HomeController {
         //   documentImg={"userDocumentBack"}
         // />
         <Webcam
-          buttonOnClick={this.buttonRearDocumentOnClick}
+          buttonOnClick={this.nextStep}
           documentImg={"userDocumentBack"}
           camera={"environment"}
           title={"Foto de dorso del DNI"}
@@ -141,7 +173,7 @@ class HomePage extends HomeController {
 
       {stepNumber === 4 &&
         <Webcam
-          buttonOnClick={this.buttonSelfieOnClick}
+          buttonOnClick={this.nextStep}
           documentImg={"userSelfie"}
           camera={"user"}
           title={"Tu Selfie"}
@@ -151,7 +183,7 @@ class HomePage extends HomeController {
 
       {stepNumber === 5 &&
         <Signature
-          buttonSignatureOnClick={this.buttonSignatureOnClick}
+          buttonSignatureOnClick={this.nextStep}
         />
       }
 

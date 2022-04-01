@@ -1,9 +1,9 @@
 import React from "react";
 import PageController from "./PageController.js";
-import pdfsApi from "../actions/pdfApi.js";
+import validationsApi from "../actions/validationsApi.js";
 import creditsApi from "../actions/creditsApi.js";
 // import { thisTypeAnnotation } from "@babel/types";
-// import validateFields from "../validations/homeValidation";
+import validateFields from "../validations/homeValidation";
 
 class HomeController extends PageController {
   areaCode = React.createRef();
@@ -19,6 +19,10 @@ class HomeController extends PageController {
       stepNumber: null,
       token: null,
       cameraPermission: false,
+      totalSteps: 0,
+      realStep: 1,
+      askCameraPermission: false,
+      alreadyValidated: false,
     };
   }
 
@@ -37,10 +41,21 @@ class HomeController extends PageController {
     if (credits && credits.length === 1) {
       const creditData = credits[0];
 
+      // Si tengo el paso de DNI (2,3) o selfie (4) tengo que pedir permiso a la cámara
+
+      const askCameraPermission = creditData.steps.some(item => 2 === item || 4 === item);
+
+      // Agrego el último paso que va a ser siempre el celular
+
+      creditData.steps.push(6)
+
       this.setState({
         creditData,
-        token: {token},
+        token,
         stepNumber: 0,
+        totalSteps: 1 + creditData.steps.length,
+        askCameraPermission,
+        alreadyValidated: creditData.isValidated
       })
     } else {
       this.setState({
@@ -65,61 +80,35 @@ class HomeController extends PageController {
     })
   }
 
-  showUploadImages = () => {
-    this.setState({
-      stepNumber: 2,
-    })
-
-    // return;
-
-    // const creditData = this.getcreditData();
-
-    // const errors = validateFields(creditData);
-
-    // if (errors.length === 0) {
-    //   localStorage.setItem(
-    //     "creditData",
-    //     JSON.stringify((creditData))
-    //   );
-    //   this.setState({
-    //     showUploadImages: true,
-    //   })
-    // } else {
-    //   this.setState({ errors });
-    // }
-  }
-
-
-  buttonFrontDocumentOnClick = () => {
-    this.setState({
-      stepNumber: 3,
-    })
-  }
-
-  buttonRearDocumentOnClick = () => {
-    this.setState({
-      stepNumber: 4,
-    })
-  }
-
-  buttonSelfieOnClick = () => {
-    this.setState({
-      stepNumber: 5,
-    })
-  }
-
-  buttonSignatureOnClick = () => {
-    this.setState({
-      stepNumber: 6,
-    })
-  }
-
   sendInfo = () => {
-    this.setState({
-      stepNumber: 7,
-    })
+    this.sendValidation();
+  }
 
-    this.createPdf();
+  nextStep = () => {
+    if (this.refs.acceptTerms !== undefined && !this.refs.acceptTerms.checked) {
+      const errors = []
+      errors.push({ field: "acceptTerms", message: "Debe aceptar para continuar" });
+      this.setState({
+        errors
+      })
+    } else if (this.refs.acceptPerson !== undefined && !this.refs.acceptPerson.checked) {
+      const errors = []
+      errors.push({ field: "acceptPerson", message: "Debe aceptar para continuar" });
+      this.setState({
+        errors
+      })
+    } else if (this.refs.acceptSujet !== undefined && !this.refs.acceptSujet.checked) {
+      const errors = []
+      errors.push({ field: "acceptSujet", message: "Debe aceptar para continuar" });
+      this.setState({
+        errors
+      })
+    } else {
+      this.setState({
+        realStep: this.state.realStep + 1,
+        stepNumber: this.state.creditData.steps.shift(),
+      })
+    }
   }
 
   checkCameraPermissions = () => {
@@ -138,26 +127,34 @@ class HomeController extends PageController {
     });
   }
 
-  createPdf = async () => {
+  sendValidation = async () => {
     const sendInfo = {
+      token: this.state.token,
+      areaCode: this.areaCode.current.value,
+      phoneNumber: this.phoneNumber.current.value,
       signature: localStorage.getItem("userSignature"),
       selfie: localStorage.getItem("userSelfie"),
       documentFront: localStorage.getItem("userDocumentFront"),
       documentBack: localStorage.getItem("userDocumentBack"),
-      areaCode: this.areaCode.current.value,
-      phoneNumber: this.phoneNumber.current.value,
-      token: this.state.token,
     }
 
-    this.setState({
-      loading: true,
-    })
+    // this.setState({
+    //   loading: true,
+    // })
 
-    await pdfsApi.add(sendInfo);
+    const errors = validateFields(sendInfo);
 
-    this.setState({
-      showThanks: true,
-    })
+    if (errors.length === 0) {
+      this.setState({
+        stepNumber: 7,
+      })
+
+      await validationsApi.add(sendInfo);
+    } else {
+      this.setState({
+        errors
+      })
+    }
   }
 }
 

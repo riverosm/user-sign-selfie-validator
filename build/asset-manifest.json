@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/validacion-usuario/static/css/main.51a1d9d0.chunk.css",
-    "main.js": "/validacion-usuario/static/js/main.0fe6d544.chunk.js",
+    "main.js": "/validacion-usuario/static/js/main.8f803d9d.chunk.js",
     "runtime-main.js": "/validacion-usuario/static/js/runtime-main.fffeca8c.js",
     "static/css/2.0371faf3.chunk.css": "/validacion-usuario/static/css/2.0371faf3.chunk.css",
-    "static/js/2.3e085b6e.chunk.js": "/validacion-usuario/static/js/2.3e085b6e.chunk.js",
+    "static/js/2.35411885.chunk.js": "/validacion-usuario/static/js/2.35411885.chunk.js",
     "index.html": "/validacion-usuario/index.html",
-    "static/js/2.3e085b6e.chunk.js.LICENSE.txt": "/validacion-usuario/static/js/2.3e085b6e.chunk.js.LICENSE.txt",
+    "static/js/2.35411885.chunk.js.LICENSE.txt": "/validacion-usuario/static/js/2.35411885.chunk.js.LICENSE.txt",
     "static/media/logo192.24c399de.png": "/validacion-usuario/static/media/logo192.24c399de.png"
   },
   "entrypoints": [
     "static/js/runtime-main.fffeca8c.js",
     "static/css/2.0371faf3.chunk.css",
-    "static/js/2.3e085b6e.chunk.js",
+    "static/js/2.35411885.chunk.js",
     "static/css/main.51a1d9d0.chunk.css",
-    "static/js/main.0fe6d544.chunk.js"
+    "static/js/main.8f803d9d.chunk.js"
   ]
 }
