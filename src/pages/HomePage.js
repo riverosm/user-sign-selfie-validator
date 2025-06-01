@@ -192,7 +192,7 @@ class HomePage extends HomeController {
         <div className="col-12 col-md-6">
           <div className="card">
             <div className="card-header">
-              Confirmanos tu celular
+              Confirmanos tus datos
             </div>
             <div className="row ml-2 mr-2">
                 <div className="col-4">
@@ -214,9 +214,26 @@ class HomePage extends HomeController {
               </div>
               <div className="row ml-4 mb-4">
                 <div className="col-12 text-small">
-                  C&oacute;digo de &Aacute;rea sin 0 ni 15
+                  Celular con c&oacute;digo de &Aacute;rea sin 0 ni 15
                 </div>
               </div>
+                <div className="col-12 text-small">
+                  <Input
+                    placeholder="Correo electrónico"
+                    type={types.TEXT}
+                    forwardRef={this.email}
+                    err={this.getErrors("email")}
+                  ></Input>
+                </div>
+              {creditData.ask_cbu &&
+                <div className="col-12 text-small mb-2">
+                  <Input
+                    placeholder="CBU"
+                    type={types.NUMBER}
+                    forwardRef={this.cbuNumber}
+                    err={this.getErrors("cbuNumber")}
+                  ></Input>
+                </div>}
             </div>
             <div className="col-12 text-center mt-4">
               <button type="button" onClick={this.sendInfo}>Finalizar</button>
@@ -230,9 +247,11 @@ class HomePage extends HomeController {
           <div className="col-12 col-md-6 text-center">
               <p><b>Completaste con &Eacute;xito esta validaci&oacute;n</b></p>
               <p>&nbsp;</p>
-              <p>En breve te enviaremos un mensaje</p>
+              <p>Para finalizar por favor hace click en el botón, que te permitirá acceder a nuestro whatsApp.</p>
               <p>&nbsp;</p>
-              <p>Saludos</p>
+              <p>
+                <a href="https://bit.ly/Mubi_Alta_prestamo" target="_blank" rel="noreferrer"><button type="button">WhatsApp</button></a>
+              </p>
               <p>&nbsp;</p>
               <img src={Logo192} style={{ border: 'solid 0px', maxWidth: '80px' }} alt="Logo" />
               <p>&nbsp;</p>

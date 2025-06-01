@@ -8,6 +8,8 @@ import validateFields from "../validations/homeValidation";
 class HomeController extends PageController {
   areaCode = React.createRef();
   phoneNumber = React.createRef();
+  cbuNumber = React.createRef();
+  email = React.createRef();
 
   constructor(props) {
     super(props);
@@ -41,11 +43,11 @@ class HomeController extends PageController {
     if (credits && credits.length === 1) {
       const creditData = credits[0];
 
-      // Si tengo el paso de DNI (2,3) o selfie (4) tengo que pedir permiso a la cámara
+      // Si tengo el paso de DNI (2,3) o selfie (4) tengo que pedir permiso a la cï¿½mara
 
       const askCameraPermission = creditData.steps.some(item => 2 === item || 4 === item);
 
-      // Agrego el último paso que va a ser siempre el celular
+      // Agrego el ï¿½ltimo paso que va a ser siempre el celular
 
       creditData.steps.push(6)
 
@@ -132,10 +134,13 @@ class HomeController extends PageController {
       token: this.state.token,
       areaCode: this.areaCode.current.value,
       phoneNumber: this.phoneNumber.current.value,
+      cbu: this.cbuNumber?.current?.value ?? '',
+      email: this.email?.current?.value ?? '',
       signature: localStorage.getItem("userSignature"),
       selfie: localStorage.getItem("userSelfie"),
       documentFront: localStorage.getItem("userDocumentFront"),
       documentBack: localStorage.getItem("userDocumentBack"),
+      ask_cbu: this.state.creditData.ask_cbu ?? false,
     }
 
     // this.setState({

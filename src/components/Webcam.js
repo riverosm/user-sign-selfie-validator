@@ -72,7 +72,7 @@ class WebcamJS extends Component {
     const videoConstraints = {
       width: 400,
       height: 400,
-      facingMode: this.props.camera // "user" or "environment" // 86 x 54 mide un DNI 430 x 270 quedará bien? --> 400 x 250 aprox
+      facingMode: this.props.camera // "user" or "environment" // 86 x 54 mide un DNI 430 x 270 quedarï¿½ bien? --> 400 x 250 aprox
     };
 
     return (
@@ -89,6 +89,7 @@ class WebcamJS extends Component {
                     <div className="col-12 col-md-6">
                       <p>- De frente</p>
                       <p>- Sin anteojos</p>
+                      <p>- DNI altura del rostro</p>
                       <p>- Pod&eacute;s sonreir</p>
                     </div>
                   }

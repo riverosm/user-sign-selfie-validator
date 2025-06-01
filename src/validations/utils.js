@@ -13,6 +13,7 @@ const labels = {
   GREATER_THAN_ZERO: "El número debe ser mayor a cero",
   INTEGER_REQUIRED: "El número debe ser entero",
   INVALID_MAIL: "La dirección de correo no es válida.",
+  INVALID_CBU: "El CBU debe contener 22 caracteres."
 };
 
 /**
