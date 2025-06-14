@@ -135,7 +135,7 @@ class HomeController extends PageController {
       areaCode: this.areaCode.current.value,
       phoneNumber: this.phoneNumber.current.value,
       cbu: this.cbuNumber?.current?.value ?? '',
-      email: this.email?.current?.value ?? '',
+      email: (this.email?.current?.value || '').replace(/\s/g, ''),
       signature: localStorage.getItem("userSignature"),
       selfie: localStorage.getItem("userSelfie"),
       documentFront: localStorage.getItem("userDocumentFront"),

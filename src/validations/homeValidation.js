@@ -3,6 +3,9 @@ import { labels, isNull, isValidMail } from "./utils";
 const validateFields = (creditData) => {
   let errors = [];
 
+  const email = creditData.email.trim();
+  const cleanedEmail = email.replace(/\s/g, '');
+
   if (isNull(creditData.areaCode)) {
     errors.push({ field: "areaCode", message: labels.REQUIRED });
   }
@@ -11,7 +14,7 @@ const validateFields = (creditData) => {
     errors.push({ field: "phoneNumber", message: labels.REQUIRED });
   }
 
-  if (!isValidMail(creditData.email)) {
+  if (!isValidMail(cleanedEmail)) {
     errors.push({ field: "email", message: labels.INVALID_MAIL });
   }
 
